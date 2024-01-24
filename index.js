@@ -11,7 +11,8 @@ const openai = new OpenAI({
 
 app.post("/generate-bpmn-xml", async (req, res) => {
   try {
-    const { processDescription } = req.body;
+    //TODO get process description from request body
+    const { processDescription } = req.body.data;
     const response = await openai.chat.completions.create({
       messages: [
         { role: "system", content: "You are a helpful assistant." },
