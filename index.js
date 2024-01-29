@@ -7,11 +7,12 @@ const OpenAI = require("openai");
 const app = express();
 app.use(express.json(), bodyParser.text());
 
-const openai = new OpenAI({
-  apiKey: process.env.OPEN_AI_KEY,
-});
-
 app.post("/generate-bpmn-xml", async (req, res) => {
+  const apiKey = req.headers["apikey"];
+  const openai = new OpenAI({
+    apiKey: apiKey,
+  });
+
   try {
     const processDescription = req.body;
     const response = await openai.chat.completions.create({
